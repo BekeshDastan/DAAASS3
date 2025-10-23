@@ -1,37 +1,35 @@
 package org.example;
 
-public class DSU {
-    int[] parent;
-    int[] rank;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
-    DSU(int n){
-        parent = new int[n];
-        rank = new int[n];
-        for (int i = 0; i<n; i++){
-            parent[i] = i;
-            rank[i]=1;
+public class Graph {
+    int V;
+    List<Edge>[] adj;
+    Graph (int V){
+        this.V = V;
+        adj = new LinkedList[V];
+        for (int i=0; i<V; i++){
+            adj[i] = new LinkedList<>();
         }
     }
 
-    public int find (int x) {
-        if (parent[x] != x) {
-            parent[x] = find(parent[x]);
-        }
-        return parent[x];
+    public void addEdge(int src, int dest, int weight){
+        adj[src].add(new Edge(src,dest,weight));
+        adj[dest].add(new Edge(dest,src,weight));
     }
 
-    public void union(int a, int b) {
-        int rootA = find(a);
-        int rootB = find(b);
-        if (rootA == rootB) return;
+    public void printGraph(){
+        for (int i=0;i<V;i++){
+            System.out.print("Vertex " + i + ": ");
+            for (Edge e : adj[i]){
+                System.out.println(" ");
+                System.out.print(e.destination + " (" + e.weight + ")" );
 
-        if (rank[rootA] < rank[rootB]) {
-            parent[rootA] = rootB;
-        } else if (rank[rootA] > rank[rootB]) {
-            parent[rootB] = rootA;
-        } else {
-            parent[rootB] = rootA;
-            rank[rootA]++;
+            }
+            System.out.println(" ");
         }
+
     }
 }

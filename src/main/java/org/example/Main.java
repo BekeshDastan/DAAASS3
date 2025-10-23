@@ -1,14 +1,14 @@
 package org.example;
-import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        DSU dsu = new DSU(5);
-        dsu.union(0, 1);
-        dsu.union(1,2);
-        dsu.union(3, 4);
+        Graph g = new Graph(6);
+        g.addEdge(0,2,3);
+        g.addEdge(1,5,7);
+        g.addEdge(2,3,4);
+        g.addEdge(3,4,1);
+        g.addEdge(4,5,3);
 
-        System.out.println(dsu.find(2));
-        System.out.println(dsu.find(0) == dsu.find(2));
+        g.printGraph();
     }
 }
