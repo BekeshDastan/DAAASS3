@@ -21,17 +21,17 @@ public class DSU {
     }
 
     public void union(int a, int b) {
-        a = find(a);
-        b = find(b);
-        if (a == b) return;
+        int rootA = find(a);
+        int rootB = find(b);
+        if (rootA == rootB) return;
 
-        if (rank[a] < rank[b]) {
-            parent[a] = b;
-        } else if (rank[a] > rank[b]) {
-            parent[b] = a;
+        if (rank[rootA] < rank[rootB]) {
+            parent[rootA] = rootB;
+        } else if (rank[rootA] > rank[rootB]) {
+            parent[rootB] = rootA;
         } else {
-            parent[b] = a;
-            rank[a]++;
+            parent[rootB] = rootA;
+            rank[rootA]++;
         }
     }
 }
