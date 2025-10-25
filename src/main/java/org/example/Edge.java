@@ -2,11 +2,13 @@ package org.example;
 
 public class Edge {
     int src,destination, weight;
+    String[] names;
 
-    Edge(int s, int d, int w){
+    Edge(int s, int d, int w, String[] names){
         this.src = s;
         this.weight = w;
         this.destination = d;
+        this.names=names;
     }
 
     public int either() { return src; }
@@ -15,9 +17,19 @@ public class Edge {
         if (v == src) return destination;
         else return src;
     }
+    public String getSrcName() {
+        return names[src];
+    }
+
+    public String getDestName() {
+        return names[destination];
+    }
+    public double weight(){
+        return  weight;
+    }
 
     @Override
     public String toString() {
-        return src + "-" + destination + " " + weight;
+        return names[src] + "-" + names[destination] + " (" + weight + ")";
     }
 }

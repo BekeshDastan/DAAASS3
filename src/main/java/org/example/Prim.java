@@ -10,7 +10,11 @@ public class Prim {
     private boolean[] marked;
     private IndexMinPQ<Double> pq;
 
+    private int operations = 0;
+    private double time = 0;
+
     public Prim(Graph G){
+        long start = System.nanoTime();
         edgeTo= new Edge[G.V()];
         distTo= new double[G.V()];
         marked = new boolean [G.V()];
@@ -20,10 +24,14 @@ public class Prim {
             distTo[v]= Double.POSITIVE_INFINITY;
         }
 
+
         for (int v=0; v<G.V();v++){
             if (!marked[v]) prim(G,v);
         }
         assert check(G);
+
+        long end = System.nanoTime();
+        time = (end - start);
     }
 
     private void prim (Graph G, int s){
@@ -31,18 +39,25 @@ public class Prim {
         pq.insert(s,distTo[s]);
         while (!pq.isEmpty()){
             int v = pq.delMin();
+            operations++;
             scan(G,v);
         }
     }
 
+
     private void scan (Graph G, int v){
         marked[v] = true;
+        operations++;
+
         for (Edge e: G.adj(v)){
             int w = e.other(v);
+            operations++;
+
             if (marked[w]) continue;
             if (e.weight < distTo[w] ) {
                 distTo[w]=e.weight;
                 edgeTo[w]=e;
+                operations++;
                 if (pq.contains(w)) pq.decreaseKey(w, distTo[w]);
                 else pq.insert(w,distTo[w]);
             }
@@ -68,6 +83,8 @@ public class Prim {
         return mst;
     }
 
+    public int getOperations() { return operations; }
+    public double getTime() { return time; }
 
     private boolean check(Graph G) {
 

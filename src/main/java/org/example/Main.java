@@ -1,26 +1,60 @@
 package org.example;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 public class Main {
     public static void main(String[] args) {
 
-        Graph G = new Graph(5);
-        G.addEdge(0, 1, 2);
-        G.addEdge(0, 3, 6);
-        G.addEdge(1, 2, 3);
-        G.addEdge(1, 3, 8);
-        G.addEdge(1, 4, 5);
-        G.addEdge(2, 4, 7);
-        G.addEdge(3, 4, 9);
+        Parser.InputData data = Parser.readInput();
+        JsonArray result= new JsonArray();
 
-        G.printGraph();
+        for (Parser.GraphInput g : data.graphs) {
 
-        Prim mst = new Prim(G);
+            Graph graph = new Graph(g.nodes.toArray(new String[0]));
+            for (Parser.EdgeInput e : g.edges) {
+                graph.addEdge(e.from, e.to, e.weight);
+            }
 
-        System.out.println("Edges in MST:");
-        for (Edge e : mst.edges()) {
-            System.out.println(e);
+            Prim prim = new Prim(graph);
+            Kruskal kruskal = new Kruskal(graph);
+
+            JsonObject res = new JsonObject();
+            res.addProperty("graph_id", g.id);
+
+            JsonObject stats = new JsonObject();
+            stats.addProperty("vertices", g.nodes.size());
+            stats.addProperty("edges", g.edges.size());
+            res.add("input_stats", stats);
+
+            res.add("prim", makeAlgoJson(prim));
+            res.add("kruskal", makeAlgoJson(kruskal));
+
+            result.add(res);
         }
 
-        System.out.println("Total weight: " + mst.weight());
+        JsonObject output = new JsonObject();
+        output.add("results", result);
+        Parser.writeOutput(output);
+    }
+
+    private static JsonObject makeAlgoJson(Object algo) {
+        JsonObject o = new JsonObject();
+
+        if (algo instanceof Prim p) {
+            o.add("mst_edges", Parser.toJsonEdges(p.edges()));
+            o.addProperty("total_cost", p.weight());
+            o.addProperty("operations_count", p.getOperations());
+            o.addProperty("execution_time_ms", p.getTime());
+
+        } else if (algo instanceof Kruskal k) {
+            o.add("mst_edges", Parser.toJsonEdges(k.edges()));
+            o.addProperty("total_cost", k.weight());
+            o.addProperty("operations_count", k.getOperations());
+            o.addProperty("execution_time_ms", k.getTime());
+        }
+
+        return o;
     }
 }
+

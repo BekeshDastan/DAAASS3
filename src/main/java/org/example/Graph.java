@@ -3,32 +3,54 @@ package org.example;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Map;
+import java.util.HashMap;
 
 public class Graph {
     int V;
     List<Edge>[] adj;
-    Graph (int V){
-        this.V = V;
+    String[] names;
+    private Map<String, Integer> nameToIndex;
+
+    Graph (String[] nodes){
+        this.V = nodes.length;
+        this.names = nodes;
         adj = new LinkedList[V];
         for (int i=0; i<V; i++){
             adj[i] = new LinkedList<>();
         }
+        nameToIndex = new HashMap<>();
+        for (int i = 0; i < V; i++) {
+            nameToIndex.put(nodes[i], i);
+        }
     }
 
-    public void addEdge(int src, int dest, int weight){
-        adj[src].add(new Edge(src,dest,weight));
-        adj[dest].add(new Edge(dest,src,weight));
+    public void addEdge(String src, String dest, int weight) {
+        if (!nameToIndex.containsKey(src)) {
+            throw new IllegalArgumentException("Node not found: " + src);
+        }
+        if (!nameToIndex.containsKey(dest)) {
+            throw new IllegalArgumentException("Node not found: " + dest);
+        }
+
+        int u = nameToIndex.get(src);
+        int v = nameToIndex.get(dest);
+
+        Edge e1 = new Edge(u, v, weight, names);
+        Edge e2 = new Edge(v, u, weight, names);
+
+        adj[u].add(e1);
+        adj[v].add(e2);
     }
 
-    public void printGraph(){
-        for (int i=0;i<V;i++){
-            System.out.print("Vertex " + i + ": ");
-            for (Edge e : adj[i]){
-                System.out.println(" ");
-                System.out.print(e.destination + " (" + e.weight + ")" );
 
+    public void printGraph() {
+        for (int i = 0; i < V; i++) {
+            System.out.print(names[i] + ": ");
+            for (Edge e : adj[i]) {
+                System.out.print(e.toString() + "  ");
             }
-            System.out.println(" ");
+            System.out.println();
         }
     }
 
