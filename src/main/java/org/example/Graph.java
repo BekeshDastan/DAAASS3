@@ -2,17 +2,17 @@ package org.example;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 import java.util.Map;
 import java.util.HashMap;
 
 public class Graph {
+
     int V;
     List<Edge>[] adj;
     String[] names;
     private Map<String, Integer> nameToIndex;
 
-    Graph (String[] nodes){
+    Graph(String[] nodes){
         this.V = nodes.length;
         this.names = nodes;
         adj = new LinkedList[V];

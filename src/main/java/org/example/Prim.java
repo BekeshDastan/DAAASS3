@@ -31,7 +31,7 @@ public class Prim {
         assert check(G);
 
         long end = System.nanoTime();
-        time = (end - start);
+        time = (end - start)/ 1_000_000.0;
     }
 
     private void prim (Graph G, int s){
