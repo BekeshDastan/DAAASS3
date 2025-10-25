@@ -8,4 +8,16 @@ public class Edge {
         this.weight = w;
         this.destination = d;
     }
+
+    public int either() { return src; }
+
+    public int other(int v) {
+        if (v == src) return destination;
+        else return src;
+    }
+
+    @Override
+    public String toString() {
+        return src + "-" + destination + " " + weight;
+    }
 }
