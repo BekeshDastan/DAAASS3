@@ -12,7 +12,6 @@ public class Kruskal {
     private int comparisons = 0;
     private int finds = 0;
     private int unions = 0;
-    private int adds = 0;
 
 
     public Kruskal(Graph G){
@@ -37,9 +36,8 @@ public class Kruskal {
                 uf.union(v,w);
                 unions++;
                 mst.add(e);
-                adds++;
-                weight += e.weight;
 
+                weight += e.weight;
             }
         }
         assert check(G);
@@ -65,7 +63,6 @@ public class Kruskal {
     public int getComparisons() { return comparisons; }
     public int getFinds() { return finds; }
     public int getUnions() { return unions; }
-    public int getAdds() { return adds; }
 
 
     private boolean check(Graph G) {

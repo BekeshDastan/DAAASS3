@@ -13,7 +13,6 @@ public class Prim {
     private int comparisons = 0;
     private int finds = 0;
     private int unions = 0;
-    private int adds = 0;
 
     private double time = 0;
 
@@ -43,7 +42,6 @@ public class Prim {
         pq.insert(s,distTo[s]);
         while (!pq.isEmpty()){
             int v = pq.delMin();
-            adds++;
             scan(G,v);
         }
     }
@@ -96,7 +94,6 @@ public class Prim {
     public double getTime() { return time; }
 
     public int getComparisons() { return comparisons; }
-    public int getAdds() { return adds; }
     public int getFinds() { return finds; }
     public int getUnions() { return unions; }
 

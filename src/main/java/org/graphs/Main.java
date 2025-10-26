@@ -51,7 +51,6 @@ public class Main {
             o.addProperty("comparisons", p.getComparisons());
             o.addProperty("finds", p.getFinds());
             o.addProperty("unions", p.getUnions());
-            o.addProperty("adds", p.getAdds());
 
             o.addProperty("execution_time_ms", p.getTime());
 
@@ -62,7 +61,6 @@ public class Main {
             o.addProperty("comparisons", k.getComparisons());
             o.addProperty("finds", k.getFinds());
             o.addProperty("unions", k.getUnions());
-            o.addProperty("adds", k.getAdds());
 
             o.addProperty("execution_time_ms", k.getTime());
         }

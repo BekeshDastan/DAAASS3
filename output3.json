@@ -108,8 +108,7 @@
         "comparisons": 26,
         "finds": 0,
         "unions": 0,
-        "adds": 20,
-        "execution_time_ms": 2.7446
+        "execution_time_ms": 0.7654
       },
       "kruskal": {
         "mst_edges": [
@@ -213,8 +212,7 @@
         "comparisons": 93,
         "finds": 84,
         "unions": 19,
-        "adds": 19,
-        "execution_time_ms": 4.2436
+        "execution_time_ms": 0.4231
       }
     },
     {
@@ -345,8 +343,7 @@
         "comparisons": 28,
         "finds": 0,
         "unions": 0,
-        "adds": 24,
-        "execution_time_ms": 0.2693
+        "execution_time_ms": 0.1096
       },
       "kruskal": {
         "mst_edges": [
@@ -470,8 +467,7 @@
         "comparisons": 191,
         "finds": 100,
         "unions": 23,
-        "adds": 23,
-        "execution_time_ms": 0.3094
+        "execution_time_ms": 0.1208
       }
     }
   ]

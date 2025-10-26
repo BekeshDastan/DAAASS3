@@ -199,8 +199,7 @@ public class test {
         Prim prim1 = new Prim(graph);
         int unions = prim1.getUnions();
         int comparisons = prim1.getComparisons();
-        int adds = prim1.getAdds();
-        assertTrue(unions >= 0 && comparisons >= 0 && adds >= 0);
+        assertTrue(unions >= 0 && comparisons >= 0);
     }
 
 
@@ -209,8 +208,7 @@ public class test {
        Kruskal kruskal1 = new Kruskal(graph);
        int unions = kruskal1.getUnions();
        int comparisons = kruskal1.getComparisons();
-       int adds = kruskal1.getAdds();
-       assertTrue(unions >= 0 && comparisons >= 0 && adds >= 0);
+       assertTrue(unions >= 0 && comparisons >= 0);
    }
 
    public void reproduciblePrim(){
