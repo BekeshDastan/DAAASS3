@@ -8,7 +8,11 @@ public class Kruskal {
     private double weight;
     private Queue<Edge> mst = new LinkedList<Edge>();
     private double time = 0;
-    private int operations = 0;
+
+    private int comparisons = 0;
+    private int finds = 0;
+    private int unions = 0;
+    private int adds = 0;
 
 
     public Kruskal(Graph G){
@@ -19,23 +23,23 @@ public class Kruskal {
             edges[t++]=e;
         }
         Arrays.sort(edges);
+        comparisons = Edge.comparisons;
 
         UF uf = new UF(G.V());
         for (int i=0;i<G.E() && mst.size()< G.V()-1;i++){
             Edge e = edges[i];
-            operations++;
             int v = e.either();
             int w = e.other(v);
-            operations+=2;
 
+            finds += 2;
             if (uf.find(v) != uf.find(w)){
-                operations+=2;
+                finds += 2;
                 uf.union(v,w);
-                operations++;
+                unions++;
                 mst.add(e);
-                operations++;
+                adds++;
                 weight += e.weight;
-                operations++;
+
             }
         }
         assert check(G);
@@ -48,8 +52,20 @@ public class Kruskal {
 
     public double weight(){return weight;}
 
+    public int numberEdges(){
+        int countEdges = 0;
+        for (Edge e : edges()) {
+            if (e != null) countEdges++;
+        }
+        return countEdges;
+    }
+
     public double getTime(){return time;}
-    public int getOperations() { return operations; }
+
+    public int getComparisons() { return comparisons; }
+    public int getFinds() { return finds; }
+    public int getUnions() { return unions; }
+    public int getAdds() { return adds; }
 
 
     private boolean check(Graph G) {

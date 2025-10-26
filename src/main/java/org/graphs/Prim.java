@@ -10,7 +10,11 @@ public class Prim {
     private boolean[] marked;
     private IndexMinPQ<Double> pq;
 
-    private int operations = 0;
+    private int comparisons = 0;
+    private int finds = 0;
+    private int unions = 0;
+    private int adds = 0;
+
     private double time = 0;
 
     public Prim(Graph G){
@@ -39,7 +43,7 @@ public class Prim {
         pq.insert(s,distTo[s]);
         while (!pq.isEmpty()){
             int v = pq.delMin();
-            operations++;
+            adds++;
             scan(G,v);
         }
     }
@@ -47,17 +51,15 @@ public class Prim {
 
     private void scan (Graph G, int v){
         marked[v] = true;
-        operations++;
-
         for (Edge e: G.adj(v)){
             int w = e.other(v);
-            operations++;
 
             if (marked[w]) continue;
+            comparisons++;
+
             if (e.weight < distTo[w] ) {
                 distTo[w]=e.weight;
                 edgeTo[w]=e;
-                operations++;
                 if (pq.contains(w)) pq.decreaseKey(w, distTo[w]);
                 else pq.insert(w,distTo[w]);
             }
@@ -80,7 +82,7 @@ public class Prim {
         return mst;
     }
 
-    public int numderEdges(){
+    public int numberEdges(){
         int countEdges = 0;
         for (Edge e : edgeTo) {
             if (e != null) countEdges++;
@@ -90,8 +92,13 @@ public class Prim {
 
 
 
-    public int getOperations() { return operations; }
+
     public double getTime() { return time; }
+
+    public int getComparisons() { return comparisons; }
+    public int getAdds() { return adds; }
+    public int getFinds() { return finds; }
+    public int getUnions() { return unions; }
 
     private boolean check(Graph G) {
 

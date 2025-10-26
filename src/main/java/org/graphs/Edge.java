@@ -1,6 +1,7 @@
 package org.graphs;
 
 public class Edge implements Comparable<Edge> {
+    public static int comparisons = 0;
     int src,destination, weight;
     String[] names;
 
@@ -12,6 +13,7 @@ public class Edge implements Comparable<Edge> {
     }
 
     public int either() { return src; }
+
 
     public int other(int v) {
         if (v == src) return destination;
@@ -35,6 +37,9 @@ public class Edge implements Comparable<Edge> {
 
     @Override
     public int compareTo(Edge that) {
+        comparisons++;
         return Integer.compare(this.weight, that.weight);
+
     }
+
 }
