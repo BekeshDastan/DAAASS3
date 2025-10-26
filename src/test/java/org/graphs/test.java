@@ -210,14 +210,14 @@ public class test {
        int comparisons = kruskal1.getComparisons();
        assertTrue(unions >= 0 && comparisons >= 0);
    }
-
+    @Test
    public void reproduciblePrim(){
        Prim prim1 = new Prim(graph);
        Prim prim2 = new Prim(graph);
        assertEquals(prim1.weight(), prim2.weight());
        assertEquals(prim1.numberEdges(), prim2.numberEdges());
    }
-
+    @Test
     public void reproducibleKruskal(){
         Kruskal kruskal1 = new Kruskal(graph);
         Kruskal kruskal2 = new Kruskal(graph);
