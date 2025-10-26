@@ -33,7 +33,7 @@
         "comparisons": 7,
         "finds": 0,
         "unions": 0,
-        "execution_time_ms": 0.5763
+        "execution_time_ms": 0.7485
       },
       "kruskal": {
         "mst_edges": [
@@ -62,7 +62,7 @@
         "comparisons": 12,
         "finds": 18,
         "unions": 4,
-        "execution_time_ms": 0.5465
+        "execution_time_ms": 0.4011
       }
     },
     {
@@ -93,7 +93,7 @@
         "comparisons": 5,
         "finds": 0,
         "unions": 0,
-        "execution_time_ms": 0.0253
+        "execution_time_ms": 0.0196
       },
       "kruskal": {
         "mst_edges": [
@@ -117,7 +117,7 @@
         "comparisons": 20,
         "finds": 12,
         "unions": 3,
-        "execution_time_ms": 0.0239
+        "execution_time_ms": 0.0385
       }
     }
   ]
