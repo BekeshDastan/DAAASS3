@@ -1,4 +1,4 @@
-package org.example;
+package org.graphs;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -11,6 +11,7 @@ public class Graph {
     List<Edge>[] adj;
     String[] names;
     private Map<String, Integer> nameToIndex;
+    private int E = 0;
 
     Graph(String[] nodes){
         this.V = nodes.length;
@@ -33,11 +34,14 @@ public class Graph {
             throw new IllegalArgumentException("Node not found: " + dest);
         }
 
+        E++;
+
         int u = nameToIndex.get(src);
         int v = nameToIndex.get(dest);
 
         Edge e1 = new Edge(u, v, weight, names);
         Edge e2 = new Edge(v, u, weight, names);
+
 
         adj[u].add(e1);
         adj[v].add(e2);
@@ -60,5 +64,20 @@ public class Graph {
 
     public Iterable<Edge> adj(int v) {
         return adj[v];
+    }
+
+    public int E() {return E;}
+
+    public Iterable<Edge> edges() {
+        List<Edge> allEdges = new LinkedList<>();
+        for (int u = 0; u < V; u++) {
+            for (Edge e : adj[u]) {
+                int v = e.other(u);
+                if (v > u) {
+                    allEdges.add(e);
+                }
+            }
+        }
+        return allEdges;
     }
 }

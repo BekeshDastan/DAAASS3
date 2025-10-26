@@ -4,7 +4,7 @@
       "graph_id": 1,
       "input_stats": {
         "vertices": 5,
-        "edges": 7
+        "edges": 4
       },
       "prim": {
         "mst_edges": [
@@ -31,13 +31,13 @@
         ],
         "total_cost": 16.0,
         "operations_count": 31,
-        "execution_time_ms": 1.7118
+        "execution_time_ms": 1.6231
       },
       "kruskal": {
         "mst_edges": [
           {
-            "from": "C",
-            "to": "B",
+            "from": "B",
+            "to": "C",
             "weight": 2.0
           },
           {
@@ -57,15 +57,15 @@
           }
         ],
         "total_cost": 16.0,
-        "operations_count": 31,
-        "execution_time_ms": 0.1184
+        "operations_count": 35,
+        "execution_time_ms": 1.1501
       }
     },
     {
       "graph_id": 2,
       "input_stats": {
         "vertices": 4,
-        "edges": 5
+        "edges": 3
       },
       "prim": {
         "mst_edges": [
@@ -87,7 +87,7 @@
         ],
         "total_cost": 6.0,
         "operations_count": 23,
-        "execution_time_ms": 0.0347
+        "execution_time_ms": 0.0442
       },
       "kruskal": {
         "mst_edges": [
@@ -108,8 +108,8 @@
           }
         ],
         "total_cost": 6.0,
-        "operations_count": 23,
-        "execution_time_ms": 0.0326
+        "operations_count": 24,
+        "execution_time_ms": 0.0596
       }
     }
   ]

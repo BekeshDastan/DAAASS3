@@ -1,8 +1,7 @@
-package org.example;
+package org.graphs;
 
 import com.google.gson.*;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Parser {
@@ -27,7 +26,7 @@ public class Parser {
 
     public static InputData readInput() {
         try {
-            File file = new File("input.json");
+            File file = new File("input3.json");
             return gson.fromJson(new FileReader(file), InputData.class);
         } catch (Exception e) {
             throw new RuntimeException("ERROR " + e.getMessage());
@@ -36,7 +35,7 @@ public class Parser {
 
     public static void writeOutput(JsonObject output) {
         try {
-            FileWriter writer = new FileWriter("output.json");
+            FileWriter writer = new FileWriter("output3.json");
             gson.toJson(output, writer);
             writer.close();
             System.out.println("output.json is created");

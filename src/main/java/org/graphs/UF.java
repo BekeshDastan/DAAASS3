@@ -1,4 +1,4 @@
-package org.example;
+package org.graphs;
 
 public class UF {
     private int[] parent;
@@ -37,6 +37,7 @@ public class UF {
             rank[rootX]++;
         }
     }
+
 
 
 }

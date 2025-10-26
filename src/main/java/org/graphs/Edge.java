@@ -1,6 +1,6 @@
-package org.example;
+package org.graphs;
 
-public class Edge {
+public class Edge implements Comparable<Edge> {
     int src,destination, weight;
     String[] names;
 
@@ -31,5 +31,10 @@ public class Edge {
     @Override
     public String toString() {
         return names[src] + "-" + names[destination] + " (" + weight + ")";
+    }
+
+    @Override
+    public int compareTo(Edge that) {
+        return Integer.compare(this.weight, that.weight);
     }
 }

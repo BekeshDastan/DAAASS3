@@ -1,4 +1,4 @@
-package org.example;
+package org.graphs;
 
 public class IndexMinPQ<Key extends Comparable <Key>> {
     private int N;

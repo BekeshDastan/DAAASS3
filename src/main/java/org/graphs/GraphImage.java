@@ -1,4 +1,4 @@
-package org.example;
+package org.graphs;
 
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.implementations.SingleGraph;
@@ -7,7 +7,7 @@ import java.util.List;
 
 public class GraphImage {
 
-    public static void showMST(org.example.Graph g, List<org.example.Edge> mstEdges, String filename) {
+    public static void showMST(org.graphs.Graph g, List<org.graphs.Edge> mstEdges, String filename) {
         System.setProperty("org.graphstream.ui", "swing");
 
         Graph gsGraph = new SingleGraph("Graph");
@@ -17,7 +17,7 @@ public class GraphImage {
         }
 
         for (int v = 0; v < g.V(); v++) {
-            for (org.example.Edge e : g.adj(v)) {
+            for (org.graphs.Edge e : g.adj(v)) {
                 String src = e.getSrcName();
                 String dest = e.getDestName();
                 String id = src + "-" + dest;
@@ -33,7 +33,7 @@ public class GraphImage {
                         "edge.mst { fill-color: red; size: 3px; }"
         );
 
-        for (org.example.Edge e : mstEdges) {
+        for (org.graphs.Edge e : mstEdges) {
             String id1 = e.getSrcName() + "-" + e.getDestName();
             String id2 = e.getDestName() + "-" + e.getSrcName();
             if (gsGraph.getEdge(id1) != null) gsGraph.getEdge(id1).setAttribute("ui.class", "mst");

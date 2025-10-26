@@ -1,9 +1,9 @@
-package org.example;
+package org.graphs;
 
-import java.util.LinkedList;
 import java.util.Queue;
+import java.util.LinkedList;
 
-public class Kruskal {
+public class Prim {
     private static final double FLOATING_POINT_EPSILON = 1.0E-12;
     private Edge[] edgeTo;
     private double[] distTo;
@@ -13,7 +13,7 @@ public class Kruskal {
     private int operations = 0;
     private double time = 0;
 
-    public Kruskal(Graph G){
+    public Prim(Graph G){
         long start = System.nanoTime();
         edgeTo= new Edge[G.V()];
         distTo= new double[G.V()];
@@ -74,14 +74,21 @@ public class Kruskal {
 
     public Iterable<Edge> edges() {
         Queue<Edge> mst = new LinkedList<>();
-        for (int v = 0; v < edgeTo.length; v++) {
-            Edge e = edgeTo[v];
-            if (e != null) {
-                mst.add(e);
-            }
+        for (Edge e : edgeTo) {
+            if (e != null) mst.add(e);
         }
         return mst;
     }
+
+    public int numderEdges(){
+        int countEdges = 0;
+        for (Edge e : edgeTo) {
+            if (e != null) countEdges++;
+        }
+        return countEdges;
+    }
+
+
 
     public int getOperations() { return operations; }
     public double getTime() { return time; }
@@ -92,6 +99,7 @@ public class Kruskal {
         for (Edge e : edges()) {
             totalWeight += e.weight;
         }
+
         if (Math.abs(totalWeight - weight()) > FLOATING_POINT_EPSILON) {
             System.err.printf("Weight of edges does not equal weight(): %f vs. %f\n", totalWeight, weight());
             return false;
@@ -108,6 +116,7 @@ public class Kruskal {
         }
 
         for (Edge e : edgeTo) {
+            if (e == null) continue;
             int v = e.either(), w = e.other(v);
             if (uf.find(v) != uf.find(w)) {
                 System.err.println("Not a spanning forest");
@@ -116,13 +125,16 @@ public class Kruskal {
         }
 
         for (Edge e : edges()) {
+            if (e == null) continue;
             uf = new UF(G.V());
             for (Edge f : edges()) {
+                if (f == null) continue;
                 int x = f.either(), y = f.other(x);
                 if (f != e) uf.union(x, y);
             }
 
             for (Edge f : edgeTo) {
+                if (f == null) continue;
                 int x = f.either(), y = f.other(x);
                 if (uf.find(x) != uf.find(y)) {
                     if (f.weight < e.weight) {
@@ -132,9 +144,9 @@ public class Kruskal {
                 }
             }
 
+
         }
 
         return true;
     }
-
 }
